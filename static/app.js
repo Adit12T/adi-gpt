@@ -171,10 +171,20 @@ function renderMessages() {
   if (pinned) box.scrollTop = box.scrollHeight;
 }
 
+// While a reply streams, only its own node is rebuilt, not the whole conversation.
+function renderLast() {
+  const box = $("messages");
+  const last = state.messages[state.messages.length - 1];
+  if (!last || box.children.length !== state.messages.length || box.querySelector(".empty")) return renderMessages();
+  const pinned = box.scrollHeight - box.scrollTop - box.clientHeight < 120;
+  box.lastElementChild.replaceWith(messageNode(last, true));
+  if (pinned) box.scrollTop = box.scrollHeight;
+}
+
 let frame = null;
 function scheduleRender() {
   if (frame) return;
-  frame = requestAnimationFrame(() => { frame = null; renderMessages(); });
+  frame = requestAnimationFrame(() => { frame = null; renderLast(); });
 }
 
 // ------------------------------------------------------------ conversations
@@ -355,7 +365,8 @@ async function loadSettings() {
     : s.error;
   const sel = $("set-chat-model");
   sel.replaceChildren();
-  const names = new Set([cfg.chat_model, ...(s.models || [])]);
+  // Embedding models cannot chat, so they are left out of the picker.
+  const names = new Set([cfg.chat_model, ...(s.models || []).filter((n) => !/embed|bge-|minilm/i.test(n))]);
   names.forEach((n) => sel.append(el("option", { value: n, textContent: n })));
   sel.value = cfg.chat_model;
   $("set-embed-model").value = cfg.embed_model;
