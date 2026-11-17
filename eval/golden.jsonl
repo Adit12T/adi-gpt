@@ -1,0 +1,33 @@
+{"q": "Which port does the Orion Billing service listen on?", "doc": "orion-billing-service.md", "answer": ["8431"]}
+{"q": "Which team owns Orion Billing?", "doc": "orion-billing-service.md", "answer": ["Kestrel"]}
+{"q": "How many times are payment gateway calls retried, and what is the initial backoff?", "doc": "orion-billing-service.md", "answer": ["250"]}
+{"q": "When does the nightly reconciliation job run?", "doc": "orion-billing-service.md", "answer": ["02:30"]}
+{"q": "What happens to an invoice after the last retry fails?", "doc": "orion-billing-service.md", "answer": ["invoice_dead_letter"]}
+{"q": "What command rolls back a release?", "doc": "deployment-runbook.md", "answer": ["rollback.sh"]}
+{"q": "On which cluster do we do blue-green releases?", "doc": "deployment-runbook.md", "answer": ["ridgeline-prod"]}
+{"q": "When is the production change freeze?", "doc": "deployment-runbook.md", "answer": ["Friday"]}
+{"q": "Who has to sign off a production release?", "doc": "deployment-runbook.md", "answer": ["release manager"]}
+{"q": "Which EDI segments should be ignored when comparing UAT and PROD files?", "doc": "edi-comparison-notes.md", "answer": ["ISA13", "GS06"]}
+{"q": "What is the name of the internal EDI comparison tool?", "doc": "edi-comparison-notes.md", "answer": ["SegDiff"]}
+{"q": "Why does SegDiff sometimes report false differences?", "doc": "edi-comparison-notes.md", "answer": ["terminator"]}
+{"q": "What was the root cause of incident INC-2031?", "doc": "incident-2031.md", "answer": ["timeout"]}
+{"q": "What was the HikariCP pool size changed to after the outage?", "doc": "incident-2031.md", "answer": ["30"]}
+{"q": "How long was the billing outage?", "doc": "incident-2031.md", "answer": ["38"]}
+{"q": "Which topics are my weak areas for interviews?", "doc": "interview-plan.md", "answer": ["Kafka"]}
+{"q": "On which days do I have mock interviews?", "doc": "interview-plan.md", "answer": ["Tuesday", "Thursday"]}
+{"q": "What time is the daily standup?", "doc": "team-handbook.md", "answer": ["9:45"]}
+{"q": "How many approvals does the payments-core repository need?", "doc": "team-handbook.md", "answer": ["two"]}
+{"q": "When does the on-call rotation change?", "doc": "team-handbook.md", "answer": ["Monday"]}
+{"q": "What does error code ORN-4041 mean?", "doc": "api-conventions.md", "answer": ["customer"]}
+{"q": "What is the default and maximum page size for list endpoints?", "doc": "api-conventions.md", "answer": ["50", "200"]}
+{"q": "Which header carries the trace id?", "doc": "api-conventions.md", "answer": ["X-Orion-Trace"]}
+{"q": "What is the capacity and refill rate of the token bucket rate limiter?", "doc": "TokenBucketRateLimiter.java", "answer": ["120", "2"]}
+{"q": "What does tryAcquire return when no token is available?", "doc": "TokenBucketRateLimiter.java", "answer": ["false"]}
+{"q": "What is the Redis cache TTL used by Orion Billing?", "doc": null}
+{"q": "Which Kafka topic does Orion Billing publish invoices to?", "doc": null}
+{"q": "What port does the Lumen Auth service listen on?", "doc": null}
+{"q": "What is the on-call phone number?", "doc": null}
+{"q": "Who is the engineering director of team Kestrel?", "doc": null}
+{"q": "What is the boiling point of mercury in kelvin?", "doc": null}
+{"q": "How do I bake sourdough bread at high altitude?", "doc": null}
+{"q": "Which Kubernetes version does ridgeline-prod run?", "doc": null}

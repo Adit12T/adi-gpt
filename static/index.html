@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>adi-gpt</title>
+<link rel="stylesheet" href="/static/vendor/github-dark.min.css">
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<aside id="sidebar">
+  <div class="brand"><span class="logo">a</span> adi-gpt <span id="status-dot" class="dot" title="Checking Ollama"></span></div>
+  <button id="new-chat" class="primary">+ New chat</button>
+  <input id="search" type="search" placeholder="Search chats" autocomplete="off">
+  <nav id="conversations"></nav>
+  <div class="side-foot">
+    <button data-open="docs-dialog">Documents</button>
+    <button data-open="memory-dialog">Memory</button>
+    <button data-open="settings-dialog">Settings</button>
+  </div>
+</aside>
+
+<main>
+  <header>
+    <button id="menu" class="icon" aria-label="Show chats">☰</button>
+    <h1 id="title">New chat</h1>
+    <select id="mode" title="Mode"></select>
+    <button id="export" class="icon" title="Export chat as Markdown" hidden>⤓</button>
+    <button id="delete" class="icon" title="Delete chat" hidden>🗑</button>
+  </header>
+  <div id="banner" hidden></div>
+  <section id="messages"></section>
+  <form id="composer">
+    <div class="toggles">
+      <label title="Answer from your indexed documents, with citations"><input type="checkbox" id="use-docs"> Docs</label>
+      <label title="Search the web (queries leave this machine)"><input type="checkbox" id="use-web"> Web</label>
+      <label title="Only answer from sources; otherwise say it is not there"><input type="checkbox" id="strict" checked> Strict</label>
+      <label title="Let the model reason before answering (slower)"><input type="checkbox" id="think"> Think</label>
+      <label title="Do not read or write memory in this chat"><input type="checkbox" id="incognito"> No memory</label>
+    </div>
+    <div class="row">
+      <textarea id="input" rows="1" placeholder="Message adi-gpt…  (Enter to send, Shift+Enter for a new line)"></textarea>
+      <button id="send" class="primary" type="submit">Send</button>
+    </div>
+  </form>
+</main>
+
+<dialog id="docs-dialog">
+  <h2>Documents <button class="icon close" data-close>✕</button></h2>
+  <p class="hint">Indexed files are searched when <b>Docs</b> is on. Re-indexing a folder only processes files that changed.</p>
+  <div class="row"><input id="folder" placeholder="/path/to/folder (inside an allowed folder)"><button id="index-folder">Index folder</button></div>
+  <div class="row"><input id="files" type="file" multiple><button id="upload">Upload</button></div>
+  <p id="docs-msg" class="hint"></p>
+  <div class="row"><input id="probe" placeholder="Test retrieval: type a question"><button id="probe-btn">Search</button></div>
+  <div id="probe-out"></div>
+  <ul id="docs-list" class="list"></ul>
+</dialog>
+
+<dialog id="memory-dialog">
+  <h2>Memory <button class="icon close" data-close>✕</button></h2>
+  <p class="hint">Facts adi-gpt keeps about you. Say “remember that …” in a chat, or add one here. Secrets are never stored.</p>
+  <div class="row"><input id="memory-new" placeholder="e.g. I lead a Java / Spring Boot team"><button id="memory-add">Add</button></div>
+  <ul id="memory-list" class="list"></ul>
+  <button id="memory-clear" class="danger">Delete all memories</button>
+</dialog>
+
+<dialog id="settings-dialog">
+  <h2>Settings <button class="icon close" data-close>✕</button></h2>
+  <div id="status-box" class="hint"></div>
+  <label>Chat model <select id="set-chat-model"></select></label>
+  <label>Embedding model <input id="set-embed-model"></label>
+  <label>Context window (num_ctx) <input id="set-num-ctx" type="number" min="1024" step="1024"></label>
+  <label>Temperature <input id="set-temperature" type="number" min="0" max="2" step="0.1" placeholder="mode default"></label>
+  <label>Standing instructions <textarea id="set-custom" rows="3" placeholder="e.g. Prefer Java 21 examples."></textarea></label>
+  <label class="check"><input type="checkbox" id="set-tools"> Allow tools (calculator, date and time)</label>
+  <label class="check"><input type="checkbox" id="set-auto-memory"> Learn facts about me automatically (one extra model call per message)</label>
+  <button id="settings-save" class="primary">Save</button>
+</dialog>
+
+<script src="/static/vendor/marked.umd.js"></script>
+<script src="/static/vendor/purify.min.js"></script>
+<script src="/static/vendor/highlight.min.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
